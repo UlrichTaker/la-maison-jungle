@@ -1,6 +1,8 @@
 import Sun from '../assets/sun.svg'
 import Water from '../assets/water.svg'
 
+// Ce composant CareScale permet de représenter visuellement le niveau de soin nécessaire pour une plante en affichant des icônes en fonction de la valeur de l'échelle de soin (scaleValue) et du type de soin (careType).
+
 //quantityLabel est un objet qui associe des valeurs numériques à des niveaux de soin (peu, modérément, beaucoup).
 const quantityLabel = {
 	1: 'peu',

@@ -12,7 +12,7 @@ function Footer() {
 	function handleBlur() { //handleBlur est déclenchée lorsque le champ de saisie perd le focus (lorsqu'on clique en dehors du champ).
 		if (!inputValue.includes('@')) { // vérifie si l'adresse e-mail saisie contient un "@" et si ce n'est pas le cas, affiche une alerte.
 			alert("Attention, il n'y a pas d'@, ceci n'est pas une adresse valide 😥")
-		}
+		}	
 	}
 
 	return (
