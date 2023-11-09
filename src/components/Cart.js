@@ -1,44 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../styles/Cart.css'
 
-function Cart({ cart, updateCart }) { //La fonction Cart est une fonction qui prend les propriétés cart et updateCart.
-	const [isOpen, setIsOpen] = useState(true) //Initialise un état local isOpen à true et une fonction setIsOpen pour modifier cet état. Cela gère l'affichage du panier.
-	const total = cart.reduce( //Calcule le montant total des éléments du panier en multipliant la quantité de chaque plante par son prix et en accumulant les valeurs.
-		(acc, plantType) => acc + plantType.amount * plantType.price,
-		0
-	)
-	//La fonction useEffect est un hook de gestion des effets dans React. Il permet d'effectuer des actions annexes après le rendu initial et après chaque mise à jour du composant.
-	useEffect(() => { //le useEffect est utilisé pour mettre à jour le titre du document HTML en fonction de la valeur de total. Lorsque total change, le titre de la page est modifié pour afficher le montant total des achats avec le préfixe "LMJ: "
-		document.title = `LMJ: ${total}€ d'achats`
-	}, [total]) //L'effet sera déclenché à chaque modification de total, et le document affichera le titre mis à jour pour refléter la nouvelle valeur du montant total des achats.
-	
-	// Le code utilise une condition ternaire pour vérifier si le panier est ouvert (isOpen). Si c'est le cas, il affiche le contenu du panier sous forme de liste avec le total et un bouton pour vider le panier. Sinon, il affiche un message indiquant que le panier est fermé et un bouton pour l'ouvrir.
-	return isOpen ? (
+// Ce code définit un composant Cart en React. Ce composant gère un panier virtuel avec des fonctionnalités pour ajouter des articles et visualiser le total.
+function Cart() {
+	const monsteraPrice = 8
+	//Deux états (cart et isOpen) sont gérés via le hook useState. cart stocke le nombre d'articles actuellement dans le panier (initialement à zéro), tandis que isOpen contrôle l'état d'ouverture ou de fermeture du panier (initialement ouvert).
+	const [cart, updateCart] = useState(0)
+	const [isOpen, setIsOpen] = useState(true)
+
+	return isOpen ? ( //La logique conditionnelle avec isOpen est utilisée pour déterminer le contenu à afficher. Si le panier est ouvert (isOpen est vrai), le contenu à afficher est la liste des articles dans le panier.
 		<div className='lmj-cart'>
+			{/* Un bouton "Fermer" est présent pour fermer le panier lorsqu'il est ouvert. */}
 			<button
 				className='lmj-cart-toggle-button'
 				onClick={() => setIsOpen(false)}
 			>
 				Fermer
 			</button>
-			{cart.length > 0 ? (
-				<div>
-					<h2>Panier</h2>
-					<ul>
-						{cart.map(({ name, price, amount }, index) => (
-							<div key={`${name}-${index}`}>
-								{name} {price}€ x {amount}
-							</div>
-						))}
-					</ul>
-					<h3>Total :{total}€</h3>
-					<button onClick={() => updateCart([])}>Vider le panier</button>
-				</div>
-			) : (
-				<div>Votre panier est vide</div>
-			)}
+			<h2>Panier</h2>
+			<div>Monstera : {monsteraPrice}€</div>
+			<button onClick={() => updateCart(cart + 1)}>Ajouter</button>
+			<h3>Total : {monsteraPrice * cart}€</h3>
+			{/* Un bouton "Vider le panier" est présent pour réinitialiser le panier (cart à 0). */}
+			<button onClick={() => updateCart(0)}>Vider le panier</button> 
 		</div>
-	) : (
+	) : ( //Si le panier est fermé (isOpen est faux), un message de confirmation et un bouton "Ouvrir le Panier" sont affichés.
 		<div className='lmj-cart-closed'>
 			<button
 				className='lmj-cart-toggle-button'
