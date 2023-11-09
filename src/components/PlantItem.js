@@ -2,9 +2,9 @@ import CareScale from './CareScale'
 import '../styles/PlantItem.css'
 
 //Cette fonction est un composant React qui affiche un élément de plante.
-function PlantItem({ cover, name, water, light }) {//Les paramètres destructurés { id, cover, name, water, light } représentent les propriétés de la plante.
+function PlantItem({ id, cover, name, water, light }) { //Les paramètres destructurés { id, cover, name, water, light } représentent les propriétés de la plante.
 	return ( //Le composant retourne un élément de liste (<li>) avec une clé key={id}.
-	<li className='lmj-plant-item' onClick={() => handleClick(name)}> {/*Lorsque cet élément est cliqué (onClick), il appelle la fonction handleClick(name).*/}
+		<li key={id} className='lmj-plant-item' onClick={() => handleClick(name)}> {/*Lorsque cet élément est cliqué (onClick), il appelle la fonction handleClick(name).*/}
 			{/* affiche le nom de la plante ({name}) suivi d'une section représentant les échelles de soin pour l'eau et la lumière (<CareScale>). */}
 			<img className='lmj-plant-item-cover' src={cover} alt={`${name} cover`} /> {/*Affiche l'image de la plante (en utilisant la propriété cover) avec un texte alternatif qui décrit l'image.*/}
 			{name} {/*Affiche le nom de la plante.*/}
